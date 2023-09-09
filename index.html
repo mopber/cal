@@ -22,6 +22,7 @@
                 <option value="/">(/)</option>
             </select>
         </div>
+        <div id="result"></div>
         <div id="alert"></div>
     </div>
     
@@ -62,6 +63,10 @@
             const userAnswer = document.getElementById("userAnswer").value;
             if (userAnswer === String(correctAnswer)) {
                 score++;
+                document.getElementById("result").textContent = "คำตอบถูกต้อง";
+            }
+            else{
+                document.getElementById("result").textContent = "คำตอบไม่ถูกต้อง";
             }
             count++;
             makescore();
