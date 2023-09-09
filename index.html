@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math is true</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>MATH CALCULATOR TIME</h1>
+    <div class="container">
+        <div id="quiz"></div>
+        <input type="text" id="userAnswer" placeholder="Enter Your Answer">
+        <button onclick="check()">Submit Answer</button>
+        <div id="score">0 / 0</div>
+        <br>
+        <div>
+            <select id="operation">
+                <option value="+">(+)</option>
+                <option value="-">(-)</option>
+                <option value="x">(x)</option>
+                <option value="/">(/)</option>
+            </select>
+        </div>
+        <div id="alert"></div>
+    </div>
+    
+
+    <script>
+        let num1, num2, operator, correctAnswer, score = 0, count = 0;
+
+        function generateQuestion() {
+            num1 = Math.floor(Math.random() * 10);
+            num2 = Math.floor(Math.random() * 10);
+            operator = document.getElementById("operation").value;
+
+            switch (operator) {
+                case '+':
+                    correctAnswer = num1 + num2;
+                    break;
+                case '-':
+                    correctAnswer = num1 - num2;
+                    break;
+                case 'x':
+                    correctAnswer = num1 * num2;
+                    break;
+                case '/':
+                    Answer = (num1 / num2);
+                    if (Answer >= 0.5) {
+                        correctAnswer = Math.ceil(Answer); 
+                    } else {
+                        correctAnswer = Math.floor(Answer); 
+                    }
+                    document.getElementById("alert").textContent = "มากกว่าหรือเท่ากับ 0.5 ปัดขึ้น";
+                    break;
+            }
+
+            document.getElementById("quiz").textContent = num1 +" " + operator + " " + num2 + " = ";
+        }
+
+        function check() {
+            const userAnswer = document.getElementById("userAnswer").value;
+            if (userAnswer === String(correctAnswer)) {
+                score++;
+            }
+            count++;
+            makescore();
+            generateQuestion();
+        }
+
+        function makescore() {
+            document.getElementById("score").textContent =  score + " / " + count;
+        }
+        document.getElementById("operation").addEventListener("change", generateQuestion);
+        generateQuestion();
+    </script>
+</body>
+</html>
